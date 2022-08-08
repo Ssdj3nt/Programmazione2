@@ -21,7 +21,7 @@ void main()
     for(i=len-1;i>=0;i--)
     {
         bitpost[j]=bitpre[i];
-        printf("\n [%d]Bit :%hd",k++,bitpost[j]);
+        printf("[%d]Bit :%hd\t",k++,bitpost[j]);
         j++;
     }
 }
