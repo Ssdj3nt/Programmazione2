@@ -22,6 +22,6 @@ void main()
     {
         bitpost[j]=bitpre[i];
         printf("\n [%d]Bit :%hd",k++,bitpost[j]);
-        j=j+1;
+        j++;
     }
 }
