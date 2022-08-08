@@ -11,7 +11,7 @@ void main()
     short bitpre[len];
     short bitpost[len];
     printf("\nIl numero e' composto da: %hd bit\n",len);
-    int i,j=0,k=0;
+    int i,j=0;
     for(i=0;i<len;i++){
         y=x/2;
         x=x%2;
@@ -22,7 +22,7 @@ void main()
     for(i=len-1;i>=0;i--)
     {
         bitpost[j]=bitpre[i];
-        printf("[%d]Bit :%hd\t",k++,bitpost[j]);
+        printf("[%d]Bit :%hd\t",j,bitpost[j]);
         j++;
     }
 }
