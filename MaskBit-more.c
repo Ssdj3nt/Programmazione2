@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <math.h>
 
-void main()
+int main()
 {
-    short mask=31,len;
+    short mask,len;
+    mask=31;
     len=(short)log2(mask)+1;
-    mask<<(sizeof(short)*8-len);
+    mask=mask<<(sizeof(short)*8-len);
+    printf("%hx",mask);
 }
