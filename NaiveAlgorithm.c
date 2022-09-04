@@ -3,7 +3,7 @@
 
 void main()
 {
-    char *testo="Francesco e il fratello di Maria Francesco e il ragazzo di Rosa Fra";
+    char *testo="Francesco e' il fratello di Maria, Francesco Fra";
     char *chiave="Francesco",*occorrenza,*pos=testo;
     int lent,lenc,n=0;
     lent=strlen(testo);
