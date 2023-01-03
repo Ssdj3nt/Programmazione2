@@ -1,19 +1,20 @@
 #include <stdio.h>
-
-void main()
+int main()
 {
-    int a,b,xor,and,riporto=1;
-    puts("Inserisci il primo numero:");
-    scanf("%d",&a);
-    puts("Inserisci il secondo numero:");
-    scanf("%d",&b);
-    while (riporto>0)
+    int op1,op2,XOR,AND,SHIFTAND=1;
+
+    printf("Inserisci il primo numero di cui effettuare la somma:");
+    scanf("%d",&op1);
+    printf("Inserisci il secondo numero di cui effettuare la somma:");
+    scanf("%d",&op2);
+
+    while(SHIFTAND != 0)
     {
-        xor=a^b;
-        and=a&b;
-        riporto=and<<1;
-        a=xor;
-        b=riporto;
+        XOR = op1^op2;
+        AND = op1&op2;
+        SHIFTAND = AND<<1;
+        op1 = XOR;
+        op2 = SHIFTAND;
     }
-    printf("La somma Bitwise e':\t%d",xor);
+    printf("Somma:%d",XOR);
 }
