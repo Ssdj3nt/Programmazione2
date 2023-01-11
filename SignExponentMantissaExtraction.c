@@ -1,3 +1,4 @@
+//Programma per l'estrazione di segno,esponente e mantissa in singola precisione (32Bit)
 #include <stdio.h>
 #define bias 127;
 void estraeE(long);
