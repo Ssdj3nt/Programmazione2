@@ -40,5 +40,5 @@ void estraeM(long n)
     long n2=n;
     n2=(n2<<9);
     n2=(n2>>9);
-    printf("Mantissa:%ld\n",n2);
+    printf("Mantissa:%ld\n",n2);//Rappresentazione in complemento a 2.
 }
