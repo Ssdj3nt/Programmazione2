@@ -12,6 +12,7 @@ int main(void)
     for (i = 0; i < len; i++) {
         printf("%c\t", stack[i]);
     }
+    printf("\n");
     inverti(stack, len);
     puts("Stack inverso:");
     for (i = 0; i < len; i++) {
