@@ -1,54 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct nodo {
-    int valore;
-    struct nodo* figlio_sx;
-    struct nodo* figlio_dx;
+// Definizione della struttura del nodo dell'albero
+struct TreeNode {
+    int val;
+    struct TreeNode* left;
+    struct TreeNode* right;
 };
 
-struct nodo* nuovo_nodo(int valore) {
-    struct nodo* nodo = (struct nodo*) malloc(sizeof(struct nodo));
-    nodo->valore = valore;
-    nodo->figlio_sx = NULL;
-    nodo->figlio_dx = NULL;
-    return nodo;
+// Funzione per creare un nuovo nodo
+struct TreeNode* newNode(int val) {
+    struct TreeNode* node = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    node->val = val;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
 }
 
-struct nodo* cerca_chiave(struct nodo* radice, int chiave) {
-    // Se l'albero è vuoto o la chiave è presente nella radice, restituisco la radice
-    if (radice == NULL || radice->valore == chiave) {
-        return radice;
+// Funzione per inserire un nodo nell'albero
+struct TreeNode* insert(struct TreeNode* root, int val) {
+    if (root == NULL) {
+        return newNode(val);
     }
-    // Se la chiave è maggiore del valore della radice, cerco nel sottoalbero destro
-    if (radice->valore < chiave) {
-        return cerca_chiave(radice->figlio_dx, chiave);
+    if (val < root->val) {
+        root->left = insert(root->left, val);
+    } else if (val > root->val) {
+        root->right = insert(root->right, val);
     }
-    // Altrimenti, cerco nel sottoalbero sinistro
-    return cerca_chiave(radice->figlio_sx, chiave);
+    return root;
 }
 
+// Funzione per stampare l'albero in ordine
+void printInOrder(struct TreeNode* root) {
+    if (root == NULL) {
+        return;
+    }
+    printInOrder(root->left);
+    printf("%d ", root->val);
+    printInOrder(root->right);
+}
+
+// Esempio di utilizzo
 int main() {
-    struct nodo* radice = nuovo_nodo(8);
-    radice->figlio_sx = nuovo_nodo(3);
-    radice->figlio_dx = nuovo_nodo(10);
-    radice->figlio_sx->figlio_sx = nuovo_nodo(1);
-    radice->figlio_sx->figlio_dx = nuovo_nodo(6);
-    radice->figlio_dx->figlio_dx = nuovo_nodo(14);
-    radice->figlio_sx->figlio_dx->figlio_sx = nuovo_nodo(4);
-    radice->figlio_sx->figlio_dx->figlio_dx = nuovo_nodo(7);
-    
-    int chiave;
-    printf("Inserisci la chiave da cercare: ");
-    scanf("%d", &chiave);
-    
-    struct nodo* nodo_trovato = cerca_chiave(radice, chiave);
-    
-    if (nodo_trovato == NULL) {
-        printf("Chiave non trovata\n");
-    } else {
-        printf("Chiave trovata: %d\n", nodo_trovato->valore);
-    }
-    
+    struct TreeNode* root = NULL;
+    root = insert(root, 5);
+    insert(root, 3);
+    insert(root, 7);
+    insert(root, 1);
+    insert(root, 9);
+    printf("L'albero in ordine è: ");
+    printInOrder(root);
     return 0;
 }
