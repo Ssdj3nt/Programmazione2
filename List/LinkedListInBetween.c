@@ -1,50 +1,61 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct {
-    char nome[20];
-    char cognome[20];
-    int  anni;
-} tipo;
+typedef struct nodo {
+    int val;
+    struct nodo *next;
+} Nodo;
 
-struct persona {
-    tipo info;
-    struct persona *next;
-};
+void inserisci(Nodo **testa, int val, int pos) {
+    Nodo *nuovoNodo = (Nodo*)malloc(sizeof(Nodo));
+    nuovoNodo->val = val;
 
-void ins_b_node(tipo dato, struct persona **testa) {
-    struct persona *ptr = calloc(1, sizeof(struct persona));
-    ptr->info = dato;
-    ptr->next=(*testa)->next;
-    (*testa)->next=ptr;
-}
-
-void ins(tipo dato, struct persona **p_head) {
-    struct persona *ptr = calloc(1, sizeof(struct persona));
-    ptr->info = dato;
-    ptr->next = *p_head;
-    *p_head = ptr;
+    if (pos == 0) {
+        nuovoNodo->next = *testa;
+        *testa = nuovoNodo;
+    } else {
+        Nodo *attuale = *testa;
+        for (int i = 0; i < pos - 1 && attuale != NULL; i++) {
+            attuale = attuale->next;
+        }
+        if (attuale == NULL) {
+            printf("Posizione non valida\n");
+            return;
+        }
+        nuovoNodo->next = attuale->next;
+        attuale->next = nuovoNodo;
+    }
 }
 
 int main() {
-    struct persona *testa = NULL;
+    int key;
+    Nodo *testa = NULL;
 
-    tipo persona1 = {"Francesco", "Porritiello", 24};
-    tipo persona3 = {"Felice", "Porritiello", 33};
-    ins(persona1, &testa);
-    ins(persona3, &testa);
+    testa = (Nodo*)malloc(sizeof(Nodo));
+    testa->val = 6;
+    testa->next = (Nodo*)malloc(sizeof(Nodo));
+    testa->next->val = 8;
+    testa->next->next = (Nodo*)malloc(sizeof(Nodo));
+    testa->next->next->val = 10;
+    testa->next->next->next = NULL;
 
-    struct persona *ptr = testa;
+    Nodo *ptr = testa;
+    puts("La lista contiene i nodi con i valori:");
     while (ptr != NULL) {
-        printf("%s\t%s\t%d\n", ptr->info.nome, ptr->info.cognome, ptr->info.anni);
+        printf("%d\t", ptr->val);
         ptr = ptr->next;
     }
-    ptr=testa;
-    tipo persona2={"Maria","Porritiello",31};
-    ins_b_node(persona2,&testa);
-    puts("Lista con inserimento nel mezzo:");
+
+    puts("\nInserisci la posizione dove inserire il nuovo nodo:");
+    scanf("%d", &key);
+    inserisci(&testa, 18, key);
+
+    ptr = testa;
+    puts("\nLa lista aggiornata contiene i nodi con i valori:");
     while (ptr != NULL) {
-        printf("%s\t%s\t%d\n", ptr->info.nome, ptr->info.cognome, ptr->info.anni);
+        printf("%d\t", ptr->val);
         ptr = ptr->next;
     }
+
+    return 0;
 }
